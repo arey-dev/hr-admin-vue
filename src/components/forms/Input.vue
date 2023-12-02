@@ -8,9 +8,16 @@ defineProps({
     type: String,
     required: true
   },
-  label: String,
-  errorMessage: String,
-  isInvalid: Boolean
+  label: {
+    type: String,
+    required: true
+  },
+  errorMessage: {
+    type: String
+  },
+  isInvalid: {
+    type: Boolean
+  }
 })
 </script>
 
