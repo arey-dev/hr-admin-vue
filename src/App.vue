@@ -1,10 +1,9 @@
 <script setup>
-import Login from './views/Login.vue'
-import Layout from './components/Layout.vue'
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
   <Layout type="Guest">
-    <Login />
+    <RouterView/>
   </Layout>
 </template>
