@@ -1,6 +1,7 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
@@ -24,9 +25,13 @@ import {
 
 library.add(faUser, faEnvelope, faPhone, faChartSimple, faLock, faEye, faUsers, faRightFromBracket)
 
+const pinia = createPinia()
+
 const app = createApp(App)
 
 app.use(router)
+
+app.use(pinia)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 
