@@ -9,6 +9,7 @@
   }
 
   body {
+    @apply bg-light-background;
     text-rendering: optimizeSpeed;
   }
 
