@@ -3,11 +3,14 @@ import { computed } from 'vue'
 
 // PROPS
 const props = defineProps({
+  value: {
+    type: String,
+    default: 'Button'
+  },
   type: {
     type: String,
     default: 'button'
   },
-  className: String,
   variant: {
     validator(value) {
       return ['primary', 'secondary', 'danger'].includes(value)
@@ -53,7 +56,7 @@ const buttonClass = computed(() => [
 </script>
 
 <template>
-  <button :class="buttonClass">Button</button>
+  <button :class="buttonClass">{{ value }}</button>
 </template>
 
 <script>

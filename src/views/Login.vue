@@ -27,12 +27,12 @@ async function onSubmit() {
       Welcome, Admin!
     </h1>
 
-    <div class="flex flex-col gap-1 mb-4">
+    <div class="flex flex-col gap-1">
       <Input label="Email" name="email" type="text" v-model="credentials.email" />
       <Input label="Password" name="password" type="password" v-model="credentials.password" />
     </div>
 
-    <Button variant="secondary" />
+    <Button variant="secondary" value="Login" />
   </form>
 </template>
 
