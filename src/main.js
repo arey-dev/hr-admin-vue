@@ -21,10 +21,23 @@ import {
   faLock,
   faEye,
   faUsers,
-  faRightFromBracket
+  faRightFromBracket,
+  faChevronDown,
+  faPersonWalkingArrowRight
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUser, faEnvelope, faPhone, faChartSimple, faLock, faEye, faUsers, faRightFromBracket)
+library.add(
+  faUser,
+  faEnvelope,
+  faPhone,
+  faChartSimple,
+  faLock,
+  faEye,
+  faUsers,
+  faRightFromBracket,
+  faChevronDown,
+  faPersonWalkingArrowRight
+)
 
 const pinia = createPinia()
 
