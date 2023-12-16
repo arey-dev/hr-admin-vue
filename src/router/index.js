@@ -13,9 +13,9 @@ const router = createRouter({
       path: '/',
       component: AppLayout,
       children: [
-        { path: 'dashboard', component: Dashboard },
-        { path: 'employees', component: Employees },
-        { path: 'profile', component: Profile }
+        { path: 'dashboard', name: 'Dashboard', component: Dashboard },
+        { path: 'employees', name: 'Employees', component: Employees },
+        { path: 'profile', name: 'Profile', component: Profile }
       ]
     },
     { path: '/auth', component: AuthLayout, children: [{ path: 'login', component: Login }] }
