@@ -38,6 +38,6 @@ async function onSubmit() {
 
 <script>
 export default {
-  name: 'AppLogin'
+  name: 'LoginView'
 }
 </script>
