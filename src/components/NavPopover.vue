@@ -25,7 +25,7 @@ const solutions = [
     <PopoverButton
       class="inline-flex items-center text-heading-lg text-light-onSurface focus:outline-none dark:text-dark-onSurface"
     >
-      <span class="mr-2">Dashboard</span
+      <span class="mr-2">{{ $route.name }}</span
       ><font-awesome-icon
         icon="fa-solid fa-chevron-down"
         :class="{ 'rotate-180 transform': open }"
