@@ -1,17 +1,22 @@
 <script setup>
 import Logo from '../Logo.vue'
+import Avatar from '../Avatar.vue'
+import NavPopover from '../NavPopover.vue'
 </script>
 
 <template>
   <div class="p-2">
-    <nav class="flex bg-light-surface p-4 gap-4 items-center rounded-lg">
-      <Logo class="w-6" />
+    <nav
+      class="flex bg-light-surface p-4 items-center rounded-lg border border-light-lines dark:bg-dark-surface dark:border-dark-lines"
+    >
+      <Logo class="w-6 mr-4" />
 
-      <!-- page destination -->
-      <h1 class="text-heading-lg">Dashboard</h1>
+      <!-- popover -->
+      <NavPopover />
 
       <!-- Avatar -->
-      <div class="w-8 h-8 rounded-full bg-emerald-500 ml-auto"></div>
+      <Avatar class="ml-auto" />
     </nav>
+    <RouterView />
   </div>
 </template>
