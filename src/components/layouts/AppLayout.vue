@@ -5,7 +5,7 @@ import NavPopover from '../NavPopover.vue'
 </script>
 
 <template>
-  <div class="p-2">
+  <div class="p-4">
     <nav
       class="flex bg-light-surface p-4 items-center rounded-lg border border-light-lines dark:bg-dark-surface dark:border-dark-lines"
     >
@@ -17,6 +17,8 @@ import NavPopover from '../NavPopover.vue'
       <!-- Avatar -->
       <Avatar class="ml-auto" />
     </nav>
-    <RouterView />
+    <main>
+      <RouterView />
+    </main>
   </div>
 </template>
