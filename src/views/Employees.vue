@@ -41,7 +41,7 @@ const data = [
                   <a href="#"
                     ><font-awesome-icon
                       icon="fa-solid fa-sort"
-                      class="w-1.5 h-4 ms-1.5 text-light-onSurface dark:text-dark-onPrimary"
+                      class="w-2 h-3 ms-2 text-light-onSurface dark:text-dark-onPrimary"
                       aria-hidden="true"
                     />
                   </a>
@@ -53,7 +53,7 @@ const data = [
                   <a href="#"
                     ><font-awesome-icon
                       icon="fa-solid fa-sort"
-                      class="w-1.5 h-4 ms-1.5 text-light-onSurface dark:text-dark-onPrimary"
+                      class="w-2 h-3 ms-2 text-light-onSurface dark:text-dark-onPrimary"
                       aria-hidden="true"
                     />
                   </a>
@@ -65,7 +65,7 @@ const data = [
                   <a href="#"
                     ><font-awesome-icon
                       icon="fa-solid fa-sort"
-                      class="w-1.5 h-4 ms-1.5 text-light-onSurface dark:text-dark-onPrimary"
+                      class="w-2 h-3 ms-2 text-light-onSurface dark:text-dark-onPrimary"
                       aria-hidden="true"
                     />
                   </a>
