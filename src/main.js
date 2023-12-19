@@ -23,7 +23,10 @@ import {
   faUsers,
   faRightFromBracket,
   faChevronDown,
-  faPersonWalkingArrowRight
+  faPersonWalkingArrowRight,
+  faSearch,
+  faClipboardList,
+  faSort
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -36,7 +39,10 @@ library.add(
   faUsers,
   faRightFromBracket,
   faChevronDown,
-  faPersonWalkingArrowRight
+  faPersonWalkingArrowRight,
+  faClipboardList,
+  faSearch,
+  faSort
 )
 
 const pinia = createPinia()
