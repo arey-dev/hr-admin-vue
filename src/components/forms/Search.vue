@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <form class="flex items-center">
+  <form class="flex w-full items-center">
     <label for="q" class="sr-only">Search</label>
     <input
       id="q"
