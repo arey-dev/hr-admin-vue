@@ -56,7 +56,7 @@ export default {
           '0.75rem',
           {
             lineHeight: '0.938rem',
-            letterSpacing: '0.15rem',
+            letterSpacing: '0.1rem',
             fontWeight: '700'
           }
         ],
@@ -85,7 +85,7 @@ export default {
           '0.75rem',
           {
             lineHeight: '0.9375rem',
-            fontWeight: '700'
+            fontWeight: '500'
           }
         ],
         'body-lg': [
