@@ -1,43 +1,36 @@
 <script setup>
+import { onMounted } from 'vue'
+import { useEmployees } from '../composables/useEmployees'
+import { formatDate } from '../utils/formatDate'
 import Search from '../components/forms/Search.vue'
+import TableFilter from '../components/TableFilter.vue'
+import Avatar from '../components/Avatar.vue'
 
-const data = [
-  {
-    id: 'Apple MacBook Pro 17',
-    name: 'Silver',
-    designation: 'Laptop',
-    status: '$2999'
-  },
-  {
-    id: 'Microsoft Surface Pro',
-    name: 'Silver',
-    designation: 'Laptop PC',
-    status: '$1999'
-  },
-  {
-    id: 'Magic Mouse 2',
-    name: 'Silver',
-    designation: 'Accessories',
-    status: '$99'
-  }
-]
+const { employees, getEmployees } = useEmployees()
+
+onMounted(() => getEmployees())
 </script>
 
 <template>
   <div class="pt-4">
     <section class="grid grid-cols-1 gap-4">
-      <Search />
+      <div class="flex flex-col gap-4 items-start">
+        <Search />
+        <TableFilter />
+      </div>
 
       <div class="relative overflow-x-auto shadow-md rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table
+          class="w-full text-body-lg text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
           <thead
-            class="text-heading-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            class="text-heading-sm text-light-neutral uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
           >
             <tr>
-              <th scope="col" class="px-6 py-3">Employee Id</th>
+              <th scope="col" class="px-6 py-3">Id</th>
               <th scope="col" class="px-6 py-3">
                 <div class="flex items-center">
-                  Name
+                  Employee
                   <a href="#"
                     ><font-awesome-icon
                       icon="fa-solid fa-sort"
@@ -49,7 +42,19 @@ const data = [
               </th>
               <th scope="col" class="px-6 py-3">
                 <div class="flex items-center">
-                  Designation
+                  Employed
+                  <a href="#"
+                    ><font-awesome-icon
+                      icon="fa-solid fa-sort"
+                      class="w-2 h-3 ms-2 text-light-onSurface dark:text-dark-onPrimary"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </div>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <div class="flex items-center">
+                  Job
                   <a href="#"
                     ><font-awesome-icon
                       icon="fa-solid fa-sort"
@@ -78,23 +83,33 @@ const data = [
           </thead>
           <tbody>
             <tr
-              v-for="item in data"
-              :key="item.id"
-              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              v-for="employee in employees"
+              :key="employee.id"
+              class="bg-light-surface border-b border-light-lines dark:bg-dark-surface dark:border-dark-lines"
             >
               <th
                 scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {{ item.id }}
+                {{ employee.id }}
               </th>
-              <td class="px-6 py-4">{{ item.name }}</td>
-              <td class="px-6 py-4">{{ item.designation }}</td>
-              <td class="px-6 py-4">{{ item.status }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex gap-4 items-center">
+                  <Avatar />
+                  <div>
+                    <p>{{ employee.name }}</p>
+                    <p>{{ employee.email }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4">{{ formatDate(employee.employment_start) }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <p>{{ employee.job_title }}</p>
+                <p>{{ employee.job_level }}</p>
+              </td>
+              <td class="px-6 py-4">{{ employee.is_active }}</td>
               <td class="px-6 py-4 text-right">
-                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >Edit</a
-                >
+                <font-awesome-icon icon="fa-solid fa-eye" />
               </td>
             </tr>
           </tbody>
