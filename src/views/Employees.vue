@@ -5,6 +5,7 @@ import { formatDate } from '../utils/formatDate'
 import Search from '../components/forms/Search.vue'
 import TableFilter from '../components/TableFilter.vue'
 import Avatar from '../components/Avatar.vue'
+import StatusIndicator from '../components/StatusIndicator.vue'
 
 const { employees, getEmployees } = useEmployees()
 
@@ -95,9 +96,9 @@ onMounted(() => getEmployees())
               </th>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex gap-4 items-center">
-                  <Avatar />
+                  <Avatar :f_name="employee.f_name" :l_name="employee.l_name" />
                   <div>
-                    <p>{{ employee.name }}</p>
+                    <p>{{ employee.f_name + ' ' + employee.l_name }}</p>
                     <p>{{ employee.email }}</p>
                   </div>
                 </div>
@@ -107,7 +108,7 @@ onMounted(() => getEmployees())
                 <p>{{ employee.job_title }}</p>
                 <p>{{ employee.job_level }}</p>
               </td>
-              <td class="px-6 py-4">{{ employee.is_active }}</td>
+              <td class="px-6 py-4"><StatusIndicator :status="employee.status" /></td>
               <td class="px-6 py-4 text-right">
                 <font-awesome-icon icon="fa-solid fa-eye" />
               </td>

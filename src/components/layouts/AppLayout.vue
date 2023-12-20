@@ -2,6 +2,9 @@
 import Logo from '../Logo.vue'
 import Avatar from '../Avatar.vue'
 import NavPopover from '../NavPopover.vue'
+import { useAuthStore } from '../../store/AuthStore'
+
+const store = useAuthStore()
 </script>
 
 <template>
@@ -15,7 +18,7 @@ import NavPopover from '../NavPopover.vue'
       <NavPopover />
 
       <!-- Avatar -->
-      <Avatar class="ml-auto" />
+      <Avatar :f_name="store.user.f_name" :l_name="store.user.l_name" class="ml-auto" />
     </nav>
     <main>
       <RouterView />
