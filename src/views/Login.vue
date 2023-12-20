@@ -3,8 +3,11 @@ import Input from '../components/forms/Input.vue'
 import Button from '../components/Button.vue'
 import { useAuthStore } from '../store/AuthStore'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const store = useAuthStore()
+
+const router = useRouter()
 
 const credentials = ref({
   email: '',
@@ -13,6 +16,8 @@ const credentials = ref({
 
 async function onSubmit() {
   await store.login({ ...credentials.value })
+
+  await router.push('/employees')
 }
 </script>
 
