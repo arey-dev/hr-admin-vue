@@ -56,7 +56,11 @@ const buttonClass = computed(() => [
 </script>
 
 <template>
-  <button :class="buttonClass">{{ value }}</button>
+  <button :class="buttonClass">
+  <slot>
+    {{ value }}
+  </slot>
+  </button>
 </template>
 
 <script>
