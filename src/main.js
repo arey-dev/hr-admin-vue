@@ -26,7 +26,9 @@ import {
   faPersonWalkingArrowRight,
   faSearch,
   faClipboardList,
-  faSort
+  faSort,
+  faArrowRight,
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -42,7 +44,9 @@ library.add(
   faPersonWalkingArrowRight,
   faClipboardList,
   faSearch,
-  faSort
+  faSort,
+  faArrowRight,
+  faArrowLeft
 )
 
 const pinia = createPinia()
