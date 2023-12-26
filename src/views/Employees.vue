@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useEmployees } from '../composables/useEmployees'
 import { formatDate } from '../utils/formatDate'
 import Search from '../components/forms/Search.vue'
@@ -9,11 +9,9 @@ import StatusIndicator from '../components/StatusIndicator.vue'
 import TablePagination from '../components/TablePagination.vue'
 import Spinner from '../components/Spinner.vue'
 
-const { employees, isLoading, pageInfo, getEmployees, getPage } = useEmployees()
+const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
 
-function changePage(page) {
-  getPage(page)
-}
+const search = ref('')
 
 onMounted(() => getEmployees())
 </script>
@@ -22,7 +20,7 @@ onMounted(() => getEmployees())
   <div class="pt-4">
     <section class="grid grid-cols-1 gap-4">
       <div class="flex flex-col gap-4 items-start">
-        <Search />
+        <Search v-model="search" @on-submit="getEmployees" />
         <TableFilter />
       </div>
 
@@ -93,7 +91,9 @@ onMounted(() => getEmployees())
               </tr>
             </thead>
             <tbody>
-              <tr
+              <tr v-if="!employees?.length" ><td colspan="3" class="px-6 py-4 whitespace-nowrap text-center">No data found.</td></tr>
+              <template v-else>
+                <tr
                 v-for="employee in employees"
                 :key="employee.id"
                 class="bg-light-surface border-b border-light-lines dark:bg-dark-surface dark:border-dark-lines"
@@ -123,6 +123,7 @@ onMounted(() => getEmployees())
                   <font-awesome-icon icon="fa-solid fa-eye" />
                 </td>
               </tr>
+              </template>
             </tbody>
           </table>
         </template>
@@ -131,8 +132,8 @@ onMounted(() => getEmployees())
       <TablePagination
         :current-page="pageInfo?.current_page"
         :total-pages="pageInfo?.last_page"
-        @on-next-page="changePage"
-        @on-previous-page="changePage"
+        @on-next-page="getEmployees"
+        @on-previous-page="getEmployees"
       />
     </section>
   </div>

@@ -1,5 +1,5 @@
 <script setup>
-defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue', 'onSubmit'])
 defineProps({
   modelValue: {
     type: String
@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <form class="flex w-full items-center">
+  <form @submit.prevent="$emit('onSubmit', modelValue)" class="flex w-full items-center">
     <label for="q" class="sr-only">Search</label>
     <input
       id="q"
