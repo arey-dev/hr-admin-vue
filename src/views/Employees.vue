@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useEmployees } from '../composables/useEmployees'
 import { formatDate } from '../utils/formatDate'
 import Search from '../components/forms/Search.vue'
@@ -11,8 +11,6 @@ import Spinner from '../components/Spinner.vue'
 
 const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
 
-const search = ref('')
-
 onMounted(() => getEmployees())
 </script>
 
@@ -20,7 +18,7 @@ onMounted(() => getEmployees())
   <div class="pt-4">
     <section class="grid grid-cols-1 gap-4">
       <div class="flex flex-col gap-4 items-start">
-        <Search v-model="search" @on-submit="getEmployees" />
+        <Search @on-submit="getEmployees" />
         <TableFilter />
       </div>
 
@@ -91,38 +89,40 @@ onMounted(() => getEmployees())
               </tr>
             </thead>
             <tbody>
-              <tr v-if="!employees?.length" ><td colspan="3" class="px-6 py-4 whitespace-nowrap text-center">No data found.</td></tr>
+              <tr v-if="!employees?.length">
+                <td colspan="3" class="px-6 py-4 whitespace-nowrap text-center">No data found.</td>
+              </tr>
               <template v-else>
                 <tr
-                v-for="employee in employees"
-                :key="employee.id"
-                class="bg-light-surface border-b border-light-lines dark:bg-dark-surface dark:border-dark-lines"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  v-for="employee in employees"
+                  :key="employee.id"
+                  class="bg-light-surface border-b border-light-lines dark:bg-dark-surface dark:border-dark-lines"
                 >
-                  {{ employee.id }}
-                </th>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="flex gap-4 items-center">
-                    <Avatar :f_name="employee.f_name" :l_name="employee.l_name" />
-                    <div>
-                      <p>{{ employee.f_name + ' ' + employee.l_name }}</p>
-                      <p>{{ employee.email }}</p>
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {{ employee.id }}
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex gap-4 items-center">
+                      <Avatar :f_name="employee.f_name" :l_name="employee.l_name" />
+                      <div>
+                        <p>{{ employee.f_name + ' ' + employee.l_name }}</p>
+                        <p>{{ employee.email }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4">{{ formatDate(employee.employment_start) }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <p>{{ employee.job_title }}</p>
-                  <p>{{ employee.job_level }}</p>
-                </td>
-                <td class="px-6 py-4"><StatusIndicator :status="employee.status" /></td>
-                <td class="px-6 py-4 text-right">
-                  <font-awesome-icon icon="fa-solid fa-eye" />
-                </td>
-              </tr>
+                  </td>
+                  <td class="px-6 py-4">{{ formatDate(employee.employment_start) }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <p>{{ employee.job_title }}</p>
+                    <p>{{ employee.job_level }}</p>
+                  </td>
+                  <td class="px-6 py-4"><StatusIndicator :status="employee.status" /></td>
+                  <td class="px-6 py-4 text-right">
+                    <font-awesome-icon icon="fa-solid fa-eye" />
+                  </td>
+                </tr>
               </template>
             </tbody>
           </table>
