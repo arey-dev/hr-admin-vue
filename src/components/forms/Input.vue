@@ -37,7 +37,7 @@ defineProps({
       :name="name"
       :type="type"
       :value="modelValue"
-      :class="{ 'border-danger': errorMessage }"
+      :class="{ 'border-danger/100': errorMessage }"
       class="w-full text-light-onSurface rounded-[0.25rem] border-[#828fa3] border-opacity-25 mb-1 focus:border-light-primary focus:ring-0 dark:bg-dark-surface dark:text-dark-onSurface"
       @input="$emit('update:modelValue', $event.target.value)"
     />
