@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 export function useEmployees() {
   const employees = ref(null)
@@ -20,10 +20,15 @@ export function useEmployees() {
 
     employees.value = data
 
+    // pagination info are store here,
+    // currentPage, last page link, first page link, etc.
     pageInfo.value = rest
 
     isLoading.value = false
   }
+
+  // get employees on owner component's mount
+  onMounted(() => getEmployees())
 
   return { employees, errors, isLoading, pageInfo, getEmployees }
 }

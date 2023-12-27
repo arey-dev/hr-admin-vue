@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted } from 'vue'
 import { useEmployees } from '../composables/useEmployees'
 import { formatDate } from '../utils/formatDate'
 import Search from '../components/forms/Search.vue'
@@ -11,7 +10,6 @@ import Spinner from '../components/Spinner.vue'
 
 const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
 
-onMounted(() => getEmployees())
 </script>
 
 <template>
