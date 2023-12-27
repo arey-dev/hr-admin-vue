@@ -2,9 +2,9 @@
 import Logo from '../Logo.vue'
 import Avatar from '../Avatar.vue'
 import NavPopover from '../NavPopover.vue'
-import { useAuthStore } from '../../store/AuthStore'
+import { useAuthUserStore } from '../../store/AuthUserStore'
 
-const store = useAuthStore()
+const store = useAuthUserStore()
 </script>
 
 <template>
