@@ -1,13 +1,14 @@
 <script setup>
 import Input from '../components/forms/Input.vue'
 import Button from '../components/Button.vue'
-import { useAuthStore } from '../store/AuthStore'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-
-const store = useAuthStore()
+import Spinner from '../components/Spinner.vue'
+import { useAuth } from '../composables/useAuth'
 
 const router = useRouter()
+
+const { isLoading, errors, login } = useAuth()
 
 const credentials = ref({
   email: '',
@@ -15,7 +16,12 @@ const credentials = ref({
 })
 
 async function onSubmit() {
-  await store.login({ ...credentials.value })
+  await login(credentials.value)
+
+  if (errors) {
+    console.log(errors)
+    return
+  }
 
   await router.push('/employees')
 }
@@ -33,11 +39,24 @@ async function onSubmit() {
     </h1>
 
     <div class="flex flex-col gap-1">
-      <Input label="Email" name="email" type="text" v-model="credentials.email" />
-      <Input label="Password" name="password" type="password" v-model="credentials.password" />
+      <Input
+        label="Email"
+        name="email"
+        type="text"
+        :error-message="errors?.email[0]"
+        v-model="credentials.email"
+      />
+      <Input
+        label="Password"
+        name="password"
+        type="password"
+        :error-message="errors?.password[0]"
+        v-model="credentials.password"
+      />
     </div>
 
-    <Button variant="secondary" value="Login" />
+    <Spinner v-if="isLoading" />
+    <Button v-else variant="secondary" value="Login" />
   </form>
 </template>
 
