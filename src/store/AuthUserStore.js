@@ -1,12 +1,17 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { useStorage } from '@vueuse/core'
 
 export const useAuthUserStore = defineStore('auth', () => {
-  const user = ref(null)
+  const user = useStorage('auth-user', {})
+  const access_token = useStorage('access-token', '')
 
-  function setUser(data) {
+  const setUser = (data) => {
     user.value = data
   }
 
-  return { user, setUser }
+  const setAccessToken = (token) => {
+    access_token.value = token
+  }
+
+  return { user, access_token, setUser, setAccessToken }
 })

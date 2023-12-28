@@ -16,6 +16,7 @@ export function useAuth() {
       axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`
 
       store.setUser(data.user)
+      store.setAccessToken(data.access_token)
     } catch (error) {
       if (error.response.status === 401) {
         errors.value = error.response.data.errors

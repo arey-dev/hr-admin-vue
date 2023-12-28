@@ -32,6 +32,7 @@ const router = createRouter({
       children: [
         {
           path: 'login',
+          name: 'Login',
           component: Login
         }
       ]
@@ -45,7 +46,7 @@ router.beforeEach((to, from) => {
 
   // if route requires auth and,
   // and there is no authenticated user
-  if (to.meta.requiresAuth && !auth.user) {
+  if (to.meta.requiresAuth && !Object.keys(auth.user).length) {
     // redirect to login
     return {
       path: '/auth/login',
