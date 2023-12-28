@@ -18,12 +18,13 @@ const credentials = ref({
 async function onSubmit() {
   await login(credentials.value)
 
-  if (errors) {
-    console.log(errors)
-    return
-  }
+  const redirectPath = router.currentRoute.value.query.redirect
 
-  await router.push('/employees')
+  // if there is a redirect query in the current route path
+  // set it as the next path, otherwise, redirect to /dashboard
+  const toPath = redirectPath ? redirectPath : '/dashboard'
+
+  await router.push(toPath)
 }
 </script>
 
