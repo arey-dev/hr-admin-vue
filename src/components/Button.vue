@@ -47,7 +47,7 @@ const buttonClass = computed(() => [
       'bg-light-primary text-light-onPrimary hover:bg-hover-primary focus:ring-2 focus:ring-light-primary'
     : props.variant === 'secondary'
       ? // SECONDARY
-        'bg-[#635FC7] bg-opacity-10 hover:bg-opacity-25 text-light-primary focus:ring-2 focus:ring-[#635FC7] focus:ring-opacity-10 dark:bg-light-surface dark:focus:ring-2 dark:focus:ring-light-surface'
+        'bg-light-primary bg-opacity-10 hover:bg-opacity-25 text-light-primary focus:ring-2 focus:ring-[#635FC7] focus:ring-opacity-10 dark:bg-light-surface dark:focus:ring-2 dark:focus:ring-light-surface'
       : props.variant === 'danger'
         ? // DANGER
           'bg-danger text-onDanger hover:bg-hover-danger'
