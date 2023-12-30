@@ -19,7 +19,7 @@ defineProps({
     <span>
       {{ label }}
     </span>
-    <button v-if="removable" @click="$emit('onRemove', label)">
+    <button v-if="removable" @click="$emit('onRemove')">
       <font-awesome-icon icon="fa-solid fa-circle-xmark" />
     </button>
   </div>
