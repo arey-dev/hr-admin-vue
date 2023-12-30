@@ -1,15 +1,30 @@
 <script setup>
 import { useEmployees } from '../composables/useEmployees'
 import { formatDate } from '../utils/formatDate'
+import { ref, watch } from 'vue'
 import Search from '../components/forms/Search.vue'
 import TableFilter from '../components/TableFilter.vue'
 import Avatar from '../components/Avatar.vue'
 import StatusIndicator from '../components/StatusIndicator.vue'
 import TablePagination from '../components/TablePagination.vue'
 import Spinner from '../components/Spinner.vue'
+import FilterBox from '../components/FilterBox.vue'
 
 const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
 
+const filters = ref(new Set())
+
+const addFilter = (value) => {
+  filters.value.add(value)
+}
+
+const deleteFilter = (value) => {
+  filters.value.delete(value)
+}
+
+watch(filters.value, () => {
+  console.log(filters.value)
+})
 </script>
 
 <template>
@@ -17,8 +32,10 @@ const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
     <section class="grid grid-cols-1 gap-4">
       <div class="flex flex-col gap-4 items-start">
         <Search @on-submit="getEmployees" />
-        <TableFilter />
+        <TableFilter @on-filter-select="addFilter" />
       </div>
+
+      <FilterBox :filters="filters" :on-remove="deleteFilter" />
 
       <div class="relative overflow-x-auto overflow-y-visible shadow-md rounded-lg">
         <div v-if="isLoading" class="py-4">
