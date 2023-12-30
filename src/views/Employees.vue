@@ -22,8 +22,8 @@ const deleteFilter = (value) => {
   filters.value.delete(value)
 }
 
-watch(filters.value, () => {
-  console.log(filters.value)
+watch(filters.value, async () => {
+  await getEmployees(null,filters.value)
 })
 </script>
 
