@@ -1,7 +1,15 @@
 <script setup>
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 
-const options = ['Active', 'Inactive', 'Lead', 'Senior', 'Junior', 'Middle', 'Intern']
+const options = [
+  { field: 'status', value: 'Active' },
+  { field: 'status', value: 'Inactive' },
+  { field: 'job_level', value: 'Lead' },
+  { field: 'job_level', value: 'Senior' },
+  { field: 'job_level', value: 'Junior' },
+  { field: 'job_level', value: 'Middle' },
+  { field: 'job_level', value: 'Inters' },
+]
 </script>
 
 <template>
@@ -32,7 +40,7 @@ const options = ['Active', 'Inactive', 'Lead', 'Senior', 'Junior', 'Middle', 'In
       <MenuItems
         class="absolute z-20 left-0 mt-2 w-56 origin-top-right rounded-lg p-1 bg-light-surface shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-dark-surface"
       >
-        <MenuItem v-slot="{ active }" v-for="option in options" :key="option">
+        <MenuItem v-slot="{ active }" v-for="option in options" :key="option.value">
           <button
             @click="$emit('onFilterSelect', option)"
             :class="[
@@ -40,7 +48,7 @@ const options = ['Active', 'Inactive', 'Lead', 'Senior', 'Junior', 'Middle', 'In
               'group flex w-full items-center rounded-md px-2 py-2 text-sm'
             ]"
           >
-            {{ option }}
+            {{ option.value }}
           </button>
         </MenuItem>
       </MenuItems>
