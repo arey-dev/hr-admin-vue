@@ -1,5 +1,7 @@
 <script setup>
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+
+const options = ['Active', 'Inactive', 'Lead', 'Senior', 'Junior', 'Middle', 'Intern']
 </script>
 
 <template>
@@ -30,58 +32,15 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
       <MenuItems
         class="absolute z-20 left-0 mt-2 w-56 origin-top-right rounded-lg p-1 bg-light-surface shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-dark-surface"
       >
-        <MenuItem v-slot="{ active }">
+        <MenuItem v-slot="{ active }" v-for="option in options" :key="option">
           <button
+            @click="$emit('onFilterSelect', option)"
             :class="[
               active ? 'bg-violet-500 text-white' : 'text-light-neutral dark:text-dark-neutral',
               'group flex w-full items-center rounded-md px-2 py-2 text-sm'
             ]"
           >
-            Edit
-          </button>
-        </MenuItem>
-
-        <MenuItem v-slot="{ active }">
-          <button
-            :class="[
-              active ? 'bg-violet-500 text-white' : 'text-light-neutral dark:text-dark-neutral',
-              'group flex w-full items-center rounded-md px-2 py-2 text-sm'
-            ]"
-          >
-            Duplicate
-          </button>
-        </MenuItem>
-
-        <MenuItem v-slot="{ active }">
-          <button
-            :class="[
-              active ? 'bg-violet-500 text-white' : 'text-light-neutral dark:text-dark-neutral',
-              'group flex w-full items-center rounded-md px-2 py-2 text-sm'
-            ]"
-          >
-            Archive
-          </button>
-        </MenuItem>
-
-        <MenuItem v-slot="{ active }">
-          <button
-            :class="[
-              active ? 'bg-violet-500 text-white' : 'text-light-neutral dark:text-dark-neutral',
-              'group flex w-full items-center rounded-md px-2 py-2 text-sm'
-            ]"
-          >
-            Move
-          </button>
-        </MenuItem>
-
-        <MenuItem v-slot="{ active }">
-          <button
-            :class="[
-              active ? 'bg-violet-500 text-white' : 'text-light-neutral dark:text-dark-neutral',
-              'group flex w-full items-center rounded-md px-2 py-2 text-sm'
-            ]"
-          >
-            Delete
+            {{ option }}
           </button>
         </MenuItem>
       </MenuItems>
