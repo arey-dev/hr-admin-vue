@@ -1,20 +1,25 @@
 <script setup>
-import { ref } from 'vue'
-defineEmits(['onSubmit'])
+defineEmits(['onSubmit', 'update:modelValue'])
 
-const query = ref('')
+defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  }
+})
 </script>
 
 <template>
-  <form @submit.prevent="$emit('onSubmit', query)" class="flex w-full items-center">
+  <form @submit.prevent="$emit('onSubmit', modelValue)" class="flex w-full items-center">
     <label for="q" class="sr-only">Search</label>
     <input
       id="q"
       name="q"
       type="text"
-      v-model="query"
+      :value="modelValue"
       placeholder="Search"
       class="w-full text-body-lg text-light-onSurface rounded-lg border-[#828fa3] border-opacity-25 focus:border-light-primary focus:ring-0 dark:bg-dark-surface dark:text-dark-onSurface"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
     <button
       type="submit"
