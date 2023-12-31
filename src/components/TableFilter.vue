@@ -8,7 +8,7 @@ const options = [
   { field: 'job_level', value: 'Senior' },
   { field: 'job_level', value: 'Junior' },
   { field: 'job_level', value: 'Middle' },
-  { field: 'job_level', value: 'Inters' },
+  { field: 'job_level', value: 'Intern    ' },
 ]
 </script>
 
