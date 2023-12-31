@@ -7,32 +7,12 @@ export function useEmployees() {
   const errors = ref(null)
   const isLoading = ref(false)
 
-  const getEmployees = async (search, filters, page = 1) => {
+  const getEmployees = async (queryString, page = 1) => {
     isLoading.value = true
 
-    const query = []
-
-    if (search) {
-      query.push('q=' + search)
-    }
-
-    if (filters) {
-      for (const { field, value } of filters) {
-        console.log(field, value)
-        query.push(field + '=' + value)
-      }
-    }
-
-    if (page) {
-      query.push('page=' + page)
-    }
-
-    // 'field=value'
-    const queryString = query.join('&')
-
-    console.log(queryString)
-
-    const url = `/employees?${query.length === 1 ? query[0] : queryString}`
+    const url = `/employees?${queryString ?? ''}&page=${page}`
+    
+    console.log(url)
 
     const response = await axios.get(url)
 

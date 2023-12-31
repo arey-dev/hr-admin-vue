@@ -1,7 +1,7 @@
 <script setup>
 import { useEmployees } from '../composables/useEmployees'
 import { formatDate } from '../utils/formatDate'
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import Search from '../components/forms/Search.vue'
 import TableFilter from '../components/TableFilter.vue'
 import Avatar from '../components/Avatar.vue'
@@ -12,6 +12,8 @@ import FilterBox from '../components/FilterBox.vue'
 
 const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
 
+const search = ref('')
+
 const filters = ref(new Set())
 
 const addFilter = (value) => {
@@ -21,9 +23,25 @@ const addFilter = (value) => {
 const deleteFilter = (value) => {
   filters.value.delete(value)
 }
+const queryString = computed(() => {
+  // create a computed value for this on employees route
+  const query = []
 
-watch(filters.value, async () => {
-  await getEmployees(null,filters.value)
+  if (search.value) {
+    query.push('q=' + search.value)
+  }
+
+  if (filters.value.size) {
+    for (const { field, value } of filters.value) {
+      query.push('&' + field + '=' + value)
+    }
+  }
+
+  return query.length ? query.join('') : ''
+})
+
+watch(queryString, async () => {
+  await getEmployees(queryString.value)
 })
 </script>
 
@@ -31,7 +49,7 @@ watch(filters.value, async () => {
   <div class="pt-4">
     <section class="grid grid-cols-1 gap-4">
       <div class="flex flex-col gap-4 items-start">
-        <Search @on-submit="getEmployees" />
+        <Search @on-submit="getEmployees" v-model="search" />
         <TableFilter @on-filter-select="addFilter" />
       </div>
 
