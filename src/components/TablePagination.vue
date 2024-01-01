@@ -27,7 +27,7 @@ const isFirstPage = computed(() => {
 <template>
   <div class="flex justify-between items-center">
     <Button
-      @click="$emit('onPreviousPage', null, null, currentPage - 1)"
+      @click="$emit('onPreviousPage', null, currentPage - 1)"
       variant="secondary"
       :disabled="isFirstPage"
       class="w-28"
@@ -37,7 +37,7 @@ const isFirstPage = computed(() => {
     </Button>
     <span class="text-body-lg text-light-primary dark:text-dark-primary">{{ currentPage }}</span>
     <Button
-      @click="$emit('onNextPage', null, null, currentPage + 1)"
+      @click="$emit('onNextPage', null, currentPage + 1)"
       variant="secondary"
       :disabled="isLastPage"
       class="w-28"
