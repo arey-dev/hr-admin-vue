@@ -11,8 +11,6 @@ export function useEmployees() {
     isLoading.value = true
 
     const url = `/employees?${queryString ?? ''}&page=${page}`
-    
-    console.log(url)
 
     const response = await axios.get(url)
 
@@ -28,9 +26,6 @@ export function useEmployees() {
 
     isLoading.value = false
   }
-
-  // get employees on owner component's mount
-  onMounted(() => getEmployees())
 
   return { employees, errors, isLoading, pageInfo, getEmployees }
 }
