@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Employees from '../views/Employees.vue'
+import Employee from '../views/Employee.vue'
 import Profile from '../views/Profile.vue'
 import AuthLayout from '../components/layouts/AuthLayout.vue'
 import AppLayout from '../components/layouts/AppLayout.vue'
@@ -20,7 +21,8 @@ const router = createRouter({
       children: [
         { path: 'dashboard', name: 'Dashboard', component: Dashboard },
         { path: 'employees', name: 'Employees', component: Employees },
-        { path: 'profile', name: 'Profile', component: Profile }
+        { path: 'profile', name: 'Profile', component: Profile },
+        { path: 'employees/:id', name: 'Employee', component: Employee }
       ]
     },
     {
@@ -29,13 +31,7 @@ const router = createRouter({
       meta: {
         requiresAuth: false
       },
-      children: [
-        {
-          path: 'login',
-          name: 'Login',
-          component: Login
-        }
-      ]
+      children: [{ path: 'login', name: 'Login', component: Login }]
     }
   ]
 })
