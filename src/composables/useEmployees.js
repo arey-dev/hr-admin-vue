@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { ref, shallowRef } from 'vue'
 
 export function useEmployees() {
-  const employees = ref(null)
+  const employees = shallowRef(null)
+  const employee = shallowRef(null)
   const pageInfo = ref(null)
   const errors = ref(null)
   const isLoading = ref(false)
@@ -27,5 +28,18 @@ export function useEmployees() {
     isLoading.value = false
   }
 
-  return { employees, errors, isLoading, pageInfo, getEmployees }
+  const getEmployee = async (id) => {
+    isLoading.value = false
+    isLoading.value = true
+
+    const url = `/employees/${id}`
+
+    const response = await axios.get(url)
+
+    employee.value = response.data
+
+    isLoading.value = false
+  }
+
+  return { employees, employee, errors, isLoading, pageInfo, getEmployees, getEmployee }
 }
