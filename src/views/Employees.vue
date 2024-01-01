@@ -1,7 +1,7 @@
 <script setup>
+import { ref, watch, computed, onMounted } from 'vue'
 import { useEmployees } from '../composables/useEmployees'
 import { formatDate } from '../utils/formatDate'
-import { ref, watch, computed } from 'vue'
 import Search from '../components/forms/Search.vue'
 import TableFilter from '../components/TableFilter.vue'
 import Avatar from '../components/Avatar.vue'
@@ -12,19 +12,13 @@ import FilterBox from '../components/FilterBox.vue'
 
 const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
 
+onMounted(() => getEmployees())
+
 const search = ref('')
 
 const filters = ref(new Set())
 
-const addFilter = (value) => {
-  filters.value.add(value)
-}
-
-const deleteFilter = (value) => {
-  filters.value.delete(value)
-}
 const queryString = computed(() => {
-  // create a computed value for this on employees route
   const query = []
 
   if (search.value) {
@@ -33,14 +27,22 @@ const queryString = computed(() => {
 
   if (filters.value.size) {
     for (const { field, value } of filters.value) {
-      query.push('&' + field + '=' + value)
+      query.push('&' + field + '[]' + '=' + value)
     }
   }
 
   return query.length ? query.join('') : ''
 })
 
-watch(queryString, async () => {
+const addFilter = (value) => {
+  filters.value.add(value)
+}
+
+const deleteFilter = (value) => {
+  filters.value.delete(value)
+}
+
+watch(filters.value, async () => {
   await getEmployees(queryString.value)
 })
 </script>
@@ -49,7 +51,7 @@ watch(queryString, async () => {
   <div class="pt-4">
     <section class="grid grid-cols-1 gap-4">
       <div class="flex flex-col gap-4 items-start">
-        <Search @on-submit="getEmployees" v-model="search" />
+        <Search @on-submit="() => getEmployees(queryString)" v-model="search" />
         <TableFilter @on-filter-select="addFilter" />
       </div>
 
@@ -82,7 +84,7 @@ watch(queryString, async () => {
                 </th>
                 <th scope="col" class="px-6 py-3">
                   <div class="flex items-center">
-                    Employed
+                    Date
                     <a href="#"
                       ><font-awesome-icon
                         icon="fa-solid fa-sort"
