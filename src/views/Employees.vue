@@ -1,5 +1,6 @@
 <script setup>
-import { ref, watch, computed, onMounted } from 'vue'
+import { ref, watch, computed, onBeforeMount } from 'vue'
+import { useRouter } from 'vue-router'
 import { useEmployees } from '../composables/useEmployees'
 import { formatDate } from '../utils/formatDate'
 import Search from '../components/forms/Search.vue'
@@ -10,9 +11,9 @@ import TablePagination from '../components/TablePagination.vue'
 import Spinner from '../components/Spinner.vue'
 import FilterBox from '../components/FilterBox.vue'
 
-const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
+const router = useRouter()
 
-onMounted(() => getEmployees())
+const { employees, isLoading, pageInfo, getEmployees } = useEmployees()
 
 const search = ref('')
 
@@ -45,6 +46,8 @@ const deleteFilter = (value) => {
 watch(filters.value, async () => {
   await getEmployees(queryString.value)
 })
+
+onBeforeMount(() => getEmployees())
 </script>
 
 <template>
@@ -124,7 +127,7 @@ watch(filters.value, async () => {
               </tr>
             </thead>
             <tbody>
-              <tr v-if="!employees?.length">
+              <tr v-if="!employees.length">
                 <td colspan="3" class="px-6 py-4 whitespace-nowrap text-center">No data found.</td>
               </tr>
               <template v-else>
@@ -155,7 +158,11 @@ watch(filters.value, async () => {
                   </td>
                   <td class="px-6 py-4"><StatusIndicator :status="employee.status" /></td>
                   <td class="px-6 py-4 text-right">
-                    <font-awesome-icon icon="fa-solid fa-eye" />
+                    <button
+                      @click="() => router.push({ name: 'Employee', params: { id: employee.id } })"
+                    >
+                      <font-awesome-icon icon="fa-solid fa-eye" />
+                    </button>
                   </td>
                 </tr>
               </template>
