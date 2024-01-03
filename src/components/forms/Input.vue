@@ -7,7 +7,7 @@ defineProps({
   },
   type: {
     type: String,
-    required: true
+    default: 'text',
   },
   label: {
     type: String,
@@ -29,7 +29,7 @@ defineProps({
   <div>
     <label
       :for="name"
-      class="text-body-md text-light-neutral inline-block mb-2 dark:text-dark-onSurface"
+      class="text-body-md text-light-neutral inline-block mb-1 dark:text-dark-onSurface"
       >{{ label }}</label
     >
     <input
@@ -38,7 +38,7 @@ defineProps({
       :type="type"
       :value="modelValue"
       :class="{ 'border-danger/100': errorMessage }"
-      class="w-full text-light-onSurface rounded-[0.25rem] border-[#828fa3] border-opacity-25 mb-1 focus:border-light-primary focus:ring-0 dark:bg-dark-surface dark:text-dark-onSurface"
+      class="w-full text-light-onSurface rounded-[0.25rem] text-sm border-[#828fa3] border-opacity-25 mb-0.5 focus:border-light-primary focus:ring-0 dark:bg-dark-surface dark:text-dark-onSurface"
       @input="$emit('update:modelValue', $event.target.value)"
     />
     <p class="text-danger text-body-md" :class="{ invisible: !errorMessage }">
