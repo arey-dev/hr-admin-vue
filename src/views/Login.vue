@@ -57,7 +57,7 @@ async function onSubmit() {
     </div>
 
     <Spinner v-if="isLoading" />
-    <Button v-else variant="secondary" value="Login" />
+    <Button v-else variant="secondary" type="submit" value="Login" />
   </form>
 </template>
 
