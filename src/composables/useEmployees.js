@@ -41,5 +41,26 @@ export function useEmployees() {
     isLoading.value = false
   }
 
-  return { employees, employee, errors, isLoading, pageInfo, getEmployees, getEmployee }
+  const addEmployee = async (data) => {
+    try {
+      const url = 'emloyee/add'
+
+      await axios.post(url, data)
+    } catch (error) {
+      if (error.response.status === 422) {
+        errors.value = error.response.data
+      }
+    }
+  }
+
+  return {
+    employees,
+    employee,
+    errors,
+    isLoading,
+    pageInfo,
+    getEmployees,
+    getEmployee,
+    addEmployee
+  }
 }
