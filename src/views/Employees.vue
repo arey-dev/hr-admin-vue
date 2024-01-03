@@ -8,6 +8,7 @@ import TableFilter from '../components/TableFilter.vue'
 import Avatar from '../components/Avatar.vue'
 import StatusIndicator from '../components/StatusIndicator.vue'
 import TablePagination from '../components/TablePagination.vue'
+import Button from '../components/Button.vue'
 import Spinner from '../components/Spinner.vue'
 import FilterBox from '../components/FilterBox.vue'
 
@@ -172,7 +173,8 @@ onBeforeMount(() => getEmployees())
           </table>
         </template>
       </div>
-      <button @click="router.push({ name: 'employee.add' })">add</button>
+
+      <Button value="Add Employee" @click="router.push({ name: 'employee.add' })" />
 
       <TablePagination
         :current-page="pageInfo?.current_page"
