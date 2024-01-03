@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Employees from '../views/Employees.vue'
-import Employee from '../views/Employee.vue'
+import ViewEmployee from '../views/ViewEmployee.vue'
+import AddEmploye from '../views/AddEmployee.vue'
 import Profile from '../views/Profile.vue'
 import AuthLayout from '../components/layouts/AuthLayout.vue'
 import AppLayout from '../components/layouts/AppLayout.vue'
@@ -19,10 +20,24 @@ const router = createRouter({
         requiresAuth: true
       },
       children: [
-        { path: 'dashboard', name: 'Dashboard', component: Dashboard },
-        { path: 'employees', name: 'Employees', component: Employees },
-        { path: 'profile', name: 'Profile', component: Profile },
-        { path: 'employees/:id', name: 'Employee', component: Employee }
+        { path: 'dashboard', name: 'dashboard', component: Dashboard },
+        {
+          path: 'employees',
+          name: 'employees',
+          component: Employees,
+          children: [
+            {
+              path: 'add-employee',
+              name: 'employee.add',
+              component: AddEmploye,
+              meta: {
+                showModal: true
+              }
+            }
+          ]
+        },
+        { path: 'profile', name: 'profile', component: Profile },
+        { path: 'employees/:id', name: 'employee.view', component: ViewEmployee }
       ]
     },
     {
