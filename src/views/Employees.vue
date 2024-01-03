@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, computed, onBeforeMount } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, RouterView } from 'vue-router'
 import { useEmployees } from '../composables/useEmployees'
 import { formatDate } from '../utils/formatDate'
 import Search from '../components/forms/Search.vue'
@@ -159,7 +159,9 @@ onBeforeMount(() => getEmployees())
                   <td class="px-6 py-4"><StatusIndicator :status="employee.status" /></td>
                   <td class="px-6 py-4 text-right">
                     <button
-                      @click="() => router.push({ name: 'Employee', params: { id: employee.id } })"
+                      @click="
+                        () => router.push({ name: 'employee.view', params: { id: employee.id } })
+                      "
                     >
                       <font-awesome-icon icon="fa-solid fa-eye" />
                     </button>
@@ -170,6 +172,7 @@ onBeforeMount(() => getEmployees())
           </table>
         </template>
       </div>
+      <button @click="router.push({ name: 'employee.add' })">add</button>
 
       <TablePagination
         :current-page="pageInfo?.current_page"
@@ -179,6 +182,8 @@ onBeforeMount(() => getEmployees())
       />
     </section>
   </div>
+
+  <RouterView />
 </template>
 
 <script>
