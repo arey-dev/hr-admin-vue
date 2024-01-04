@@ -30,30 +30,38 @@ export function useEmployees() {
   }
 
   const getEmployee = async (id) => {
-    isLoading.value = false
-    isLoading.value = true
+    try {
+      isLoading.value = false
+      isLoading.value = true
 
-    const url = `/employees/${id}`
+      const url = `/employees/${id}`
 
-    const response = await axios.get(url)
+      const response = await axios.get(url)
 
-    employee.value = response.data
-
-    isLoading.value = false
+      employee.value = response.data
+    } catch (error) {
+      console.log(error.response.data)
+    } finally {
+      isLoading.value = false
+    }
   }
 
   const addEmployee = async (data) => {
     try {
+      isLoading.value = false
+      isLoading.value = true
+
       const url = '/employees/store'
 
       await axios.post(url, data)
-
-      isSuccess.value = true
     } catch (error) {
       if (error.response.status === 422) {
         errors.value = error.response.data.errors
         isSuccess.value = false
       }
+    } finally {
+      isSuccess.value = true
+      isLoading.value = false
     }
   }
 

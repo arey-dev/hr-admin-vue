@@ -5,10 +5,11 @@ import { ref } from 'vue'
 import { useEmployees } from '../composables/useEmployees'
 import Input from '../components/forms/Input.vue'
 import Button from '../components/Button.vue'
+import Spinner from '../components/Spinner.vue'
 
 const router = useRouter()
 
-const { addEmployee, errors, isSuccess } = useEmployees()
+const { addEmployee, errors, isSuccess, isLoading } = useEmployees()
 
 const formData = ref({
   f_name: '',
@@ -103,7 +104,8 @@ const onSubmit = async () => {
               </div>
 
               <div class="flex flex-col gap-2">
-                <Button type="submit" value="Add Employee" />
+                <Spinner v-if="isLoading" />
+                <Button v-else type="submit" value="Add Employee" />
                 <Button variant="secondary" value="Cancel" @click="router.back" />
               </div>
             </DialogPanel>
