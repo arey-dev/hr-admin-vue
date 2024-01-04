@@ -20,11 +20,12 @@ const router = createRouter({
         requiresAuth: true
       },
       children: [
-        { path: 'dashboard', name: 'dashboard', component: Dashboard },
+        { path: 'dashboard', name: 'dashboard', component: Dashboard, meta: { name: 'Dashboard' } },
         {
           path: 'employees',
           name: 'employees',
           component: Employees,
+          meta: { name: 'Employees' },
           children: [
             {
               path: 'add-employee',
@@ -36,8 +37,13 @@ const router = createRouter({
             }
           ]
         },
-        { path: 'profile', name: 'profile', component: Profile },
-        { path: 'employees/:id', name: 'employee.view', component: ViewEmployee }
+        { path: 'profile', name: 'profile', component: Profile, meta: { name: 'Profile' } },
+        {
+          path: 'employees/:id',
+          name: 'employee.view',
+          component: ViewEmployee,
+          meta: { name: 'Employee Profile' }
+        }
       ]
     },
     {

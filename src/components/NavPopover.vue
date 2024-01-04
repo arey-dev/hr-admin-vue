@@ -1,7 +1,7 @@
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
-const solutions = [
+const pages = [
   {
     name: 'Dashboard',
     to: '/dashboard',
@@ -25,7 +25,7 @@ const solutions = [
     <PopoverButton
       class="inline-flex items-center text-heading-lg text-light-onSurface focus:outline-none dark:text-dark-onSurface"
     >
-      <span class="mr-2">{{ $route.name }}</span
+      <span class="mr-2">{{ $route.meta.name }}</span
       ><font-awesome-icon
         icon="fa-solid fa-chevron-down"
         :class="{ 'rotate-180 transform': open }"
@@ -39,7 +39,7 @@ const solutions = [
       >
         <RouterLink
           @click="close()"
-          v-for="item in solutions"
+          v-for="item in pages"
           :key="item.name"
           :to="item.to"
           class="flex items-center rounded-full p-[0.875rem] transition duration-150 ease-in-out focus:outline-none"
