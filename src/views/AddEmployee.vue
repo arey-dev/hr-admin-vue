@@ -2,21 +2,27 @@
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+import { useEmployees } from '../composables/useEmployees'
 import Input from '../components/forms/Input.vue'
 import Button from '../components/Button.vue'
 
 const router = useRouter()
+
+const { addEmployee, errors, isSuccess } = useEmployees()
 
 const formData = ref({
   f_name: '',
   l_name: '',
   email: '',
   job_title: '',
-  job_level: ''
+  job_level: '',
+  employment_start: ''
 })
 
-const onSubmit = () => {
-  console.log(formData.value)
+const onSubmit = async () => {
+  await addEmployee(formData.value)
+
+  if (isSuccess.value) router.back()
 }
 </script>
 
@@ -56,11 +62,44 @@ const onSubmit = () => {
               </DialogTitle>
 
               <div class="mb-4">
-                <Input label="First Name" name="f_name" v-model="formData.f_name" />
-                <Input label="Last Name" name="l_name" v-model="formData.l_name" />
-                <Input label="Email" name="l_name" type="email" v-model="formData.email" />
-                <Input label="Job Title" name="job_title" v-model="formData.job_title" />
-                <Input label="Job Level" name="job_level" v-model="formData.job_level" />
+                <Input
+                  label="First Name"
+                  name="f_name"
+                  v-model="formData.f_name"
+                  :error-message="errors?.f_name[0]"
+                />
+                <Input
+                  label="Last Name"
+                  name="l_name"
+                  v-model="formData.l_name"
+                  :error-message="errors?.l_name[0]"
+                />
+                <Input
+                  label="Email"
+                  name="l_name"
+                  type="email"
+                  v-model="formData.email"
+                  :error-message="errors?.email[0]"
+                />
+                <Input
+                  label="Job Title"
+                  name="job_title"
+                  v-model="formData.job_title"
+                  :error-message="errors?.job_title[0]"
+                />
+                <Input
+                  label="Job Level"
+                  name="job_level"
+                  v-model="formData.job_level"
+                  :error-message="errors?.job_level[0]"
+                />
+                <Input
+                  label="Employment Start"
+                  name="employment_start"
+                  type="date"
+                  v-model="formData.employment_start"
+                  :error-message="errors?.employment_start[0]"
+                />
               </div>
 
               <div class="flex flex-col gap-2">
