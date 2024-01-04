@@ -7,6 +7,7 @@ export function useEmployees() {
   const pageInfo = ref(null)
   const errors = ref(null)
   const isLoading = ref(false)
+  const isSuccess = ref(false)
 
   const getEmployees = async (queryString, page = 1) => {
     isLoading.value = true
@@ -43,12 +44,15 @@ export function useEmployees() {
 
   const addEmployee = async (data) => {
     try {
-      const url = 'emloyee/add'
+      const url = '/employees/store'
 
       await axios.post(url, data)
+
+      isSuccess.value = true
     } catch (error) {
       if (error.response.status === 422) {
-        errors.value = error.response.data
+        errors.value = error.response.data.errors
+        isSuccess.value = false
       }
     }
   }
@@ -57,6 +61,7 @@ export function useEmployees() {
     employees,
     employee,
     errors,
+    isSuccess,
     isLoading,
     pageInfo,
     getEmployees,
