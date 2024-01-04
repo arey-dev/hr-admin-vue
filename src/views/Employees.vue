@@ -59,7 +59,12 @@ onBeforeMount(() => getEmployees())
         <TableFilter @on-filter-select="addFilter" />
       </div>
 
-      <FilterBox :filters="filters" :on-remove="deleteFilter" />
+      <Button variant="secondary" @click="router.push({ name: 'employee.add' })" class="justify-self-end">
+        <font-awesome-icon icon="fa-solid fa-add" class="mr-2" aria-hidden="true"/>
+        Employee
+      </Button>
+
+      <FilterBox v-show="filters.size" :filters="filters" :on-remove="deleteFilter" />
 
       <div class="relative overflow-x-auto overflow-y-visible shadow-md rounded-lg">
         <div v-if="isLoading" class="py-4">
@@ -173,8 +178,6 @@ onBeforeMount(() => getEmployees())
           </table>
         </template>
       </div>
-
-      <Button value="Add Employee" @click="router.push({ name: 'employee.add' })" />
 
       <TablePagination
         :current-page="pageInfo?.current_page"
