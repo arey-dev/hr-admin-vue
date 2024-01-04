@@ -38,7 +38,7 @@ const options = [
       leave-to-class="transform scale-95 opacity-0"
     >
       <MenuItems
-        class="absolute z-20 left-0 mt-2 w-56 origin-top-right rounded-lg p-1 bg-light-surface shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-dark-surface"
+        class="absolute z-20 left-0 mt-2 w-48 origin-top-right rounded-lg p-1 bg-light-surface shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-dark-surface"
       >
         <MenuItem v-slot="{ active }" v-for="option in options" :key="option.value">
           <button
