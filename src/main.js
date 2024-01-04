@@ -30,6 +30,7 @@ import {
   faArrowRight,
   faArrowLeft,
   faCircleXmark,
+  faAdd,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -48,7 +49,8 @@ library.add(
   faSort,
   faArrowRight,
   faArrowLeft,
-  faCircleXmark
+  faCircleXmark,
+  faAdd
 )
 
 const pinia = createPinia()
